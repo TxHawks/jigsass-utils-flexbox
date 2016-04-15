@@ -1,0 +1,781 @@
+// *************************************
+//
+// # jigsass-utils-flexbox
+// -> Flexbox related utility classes
+//
+// Author: TxHawks (tofu.hawks@gmail.com)
+// https://txhawks.github.io/jigsass-utils-flexbox/
+//
+// *************************************
+
+@charset 'UTF-8';
+
+// -------------------------------------
+// Dependencies
+// -------------------------------------
+
+@if (not mixin-exists(jigsass-define-util)) {
+  @error '`jigsass-utils-flexbox` has a dependency on `jigsass-tools-selectors`. ' +
+    'Please import it before importing this file.'
+}
+
+
+
+
+
+// -------------------------------------
+// Introduction
+// -------------------------------------
+
+// stylelint-disable
+/* ---
+section: Flexbox Utils
+title: Introduction
+order: -10
+---
+
+A collection of dynamically generated flexbox-related utility classes.
+
+
+#### Installation
+
+Using npm:
+
+```sh
+npm i -S jigsass-utils-flexbox
+```
+
+
+#### Available classes
+
+Class names follow the [Emmet](http://docs.emmet.io/cheat-sheet/) abbreviation
+syntax, with colons (':') replaced by two dashes (`--`) to follow BEM naming
+conventions.
+E.g., the `justify-content: space-around` utility class name is `.u-jc--sa`.
+
+  - `.u-ac--c` (align-content: center)
+  - `.u-ac--fe` (align-content: flex-end)
+  - `.u-ac--fs` (align-content: flex-start)
+  - `.u-ac--s` (align-content: stretch)
+  - `.u-ac--sa` (align-content: space-around)
+  - `.u-ac--sb` (align-content: space-between)
+
+
+  - `.u-ai--b` (align-items: baseline)
+  - `.u-ai--c` (align-items: center)
+  - `.u-ai--fe` (align-items: flex-end)
+  - `.u-ai--fs` (align-items: flex-start)
+  - `.u-ai--s` (align-items: stretch)
+
+
+  - `.u-as--a` (align-self: auto)
+  - `.u-as--b` (align-self: baseline)
+  - `.u-as--c` (align-self: center)
+  - `.u-as--fe` (align-self: flex-end)
+  - `.u-as--fs` (align-self: flex-start)
+  - `.u-as--s` (align-self: stretch)
+
+
+  - `.u-jc--c` (justify-content: center)
+  - `.u-jc--fe` (justify-content: flex-end)
+  - `.u-jc--fs` (justify-content: flex-start)
+  - `.u-jc--sa` (justify-content: space-around)
+  - `.u-jc--sb` (justify-content: space-between)
+
+
+  - `.u-fb--a` (flex-basis: auto)
+  - `.u-fb--<width>` (flex-basis: &lt;width>)
+
+
+  - `.u-fxg--<number>` (flex-grow: &lt;number>)
+  - `.u-fxsh--<number>` (flex-shrink: &lt;number>)
+
+
+  - `.u-fxw--n` (flex-wrap: nowrap)
+  - `.u-fxw--w` (flex-wrap: wrap)
+  - `.u-fxw--wr` (flex-wrap: wrap-reverse)
+
+
+  - `.u-fxd--c` (flex-direction: column)
+  - `.u-fxd--cr` (flex-direction: column-reverse)
+  - `.u-fxd--r` (flex-direction: row)
+  - `.u-fxd--rr` (flex-direction: row-reverse)
+
+
+  - `.u-ord--<number>` (order: &lt;number>)
+  - `.u-ord--min-<number>` (order: -&lt;number>)
+
+
+#### Usage
+Import JigSass Utils Flexbox into your main scss file near its very end, together with all
+other utilities (utilities should always be the last to be imported).
+
+```scss
+@import 'path/to/jigsass-utils-flexbox/scss/index';
+```
+
+Like all other JigSass Utils, JigSass Flexbox does not automatically generate any CSS
+when imported. You would need to explicitly indicate that each individual flexbox
+class should actually be generated in each component or object it is used in
+(clarification: This will include style declarations inside `.foo` and .`bar`):
+
+```scss
+// _c.foo.scss
+.foo {
+  @include jigsass-util(u-ord, $modifier: 1); // <-- order: 1
+
+  ...
+}
+```
+
+```scss
+// _c.bar.scss
+.bar {
+  @include jigsass-util(u-jc, $modifier: fe);  // <-- justify-content: flex-end
+  @include jigsass-util(u-ord, $modifier: min-1, $from: large); // <-- ordr: -1 from large bp and on.
+
+  ...
+}
+```
+
+Doing so helps us a great deal with portability, as no matter where we import component or object
+partials, the correct utility classes will be generated. Think of it as a poor man's dependency
+management.
+
+Developer communication is also assisted by including "dependencies" wherever they are required,
+as anyone going through a partial, can easily understand how it should be marked up with just a
+glance.
+
+As far as bloat goes, just don't worry about it - the actual styles will only be generated once,
+at the location in the cascade where the Jigsass Flexbox partial was imported into the main file.
+
+
+JigSass Flexbox classes are responsive-enabled, using [JigSass MQ](https://txhawks.github.io/jigsass-tools-mq/)
+and the breakpoints defined in the [$jigsass-breakpoints](https://txhawks.github.io/jigsass-tools-mq/#variable-jigsass-breakpoints) variable.
+
+Based on the breakpoint arguments passed to `jigsass-util` when including a flexbox class, responsive
+modifiers are generated according to the following logic:
+
+```scss
+.u-<util>--<modifier>[-[-from-<breakpoint-name>][-until-<breakpoint-name>][-misc-<breakpoint-name>]]
+```
+
+So, assuming the `medium`, `large` and `landscape` breakpoints are defined in `$jigsass-breakpoints`
+as `600px`, `1024px` and `(orientation: landscape)` respectively,
+
+```scss
+@include jigsass-util(u-ord, $modifier: 2);
+```
+will generate the `.u-ord--2` class, which is not limited to any media-query.
+
+```scss
+@include jigsass-util(u-ord, $modifier: 2, $until: medium);
+```
+
+will generate the `.u-ord--2--until-medium` class, which will be in effect at
+`(max-width: 37.49em)` and will override styles in the default class until that point.
+
+```scss
+@include jigsass-util(u-ord, $modifier: min2, $from: large, $misc: landscape);
+```
+
+will generate the `.u-ord-min2--from-large-when-landscape` class, which will go into
+effect at `(min-width: 64em) and (orientation: landscape)` and will override styles in the default
+class under these  conditions.
+
+
+**License:** MIT
+
+*/
+// stylelint-enable
+
+
+
+
+
+// -------------------------------------
+// Variables
+// -------------------------------------
+
+// Constants for translating modifiers to values
+$_jigsass-flex-ac-vals: (
+  c: center,
+  fe: flex-end,
+  fs: flex-start,
+  s: stretch,
+  sa: space-around,
+  sb: space-between
+);
+
+$_jigsass-flex-ai-vals: (
+  b: baseline,
+  c: center,
+  fe: flex-end,
+  fs: flex-start,
+  s: stretch
+);
+
+$_jigsass-flex-as-vals: (
+  a: auto,
+  b: baseline,
+  c: center,
+  fe: flex-end,
+  fs: flex-start,
+  s: stretch
+);
+
+$_jigsass-flex-jc-vals: (
+  c: center,
+  fe: flex-end,
+  fs: flex-start,
+  sa: space-around,
+  sb: space-between
+);
+
+$_jigsass-flex-fxw-vals: (
+  n: nowrap,
+  w: wrap,
+  wr: wrap-reverse,
+);
+
+$_jigsass-flex-fxd-vals: (
+  c: column,
+  cr: column-reverse,
+  r: row,
+  rr: row-reverse,
+);
+
+// Used internally to store doclets
+$_doclet-store: () !default;
+
+// Used internally to ordering doclets
+$_jigsass-util-flex-i: 1;
+$_jigsass-util-flex-addition: (
+  u-ac: 0,
+  u-ai: 10,
+  u-as: 20,
+  u-jc: 30,
+  u-fb: 40,
+  u-fxg: 100,
+  u-fxsh: 150,
+  u-fxw: 200,
+  u-fxd: 210,
+  u-ord: 220
+);
+
+
+
+
+
+// -------------------------------------
+// Definitions
+// -------------------------------------
+
+@include jigsass-define-util(u-ac) {
+  @if (not $jigsass-util-modifier) {
+    @error 'jigsass-utils-flexbox: #{$jigsass-util-name} must be passed an alignment ' +
+      'value through a modifier.';
+  }
+
+  $value: map-get($_jigsass-flex-ac-vals, $jigsass-util-modifier);
+
+  @if (not $value) {
+    @warn '#{$jigsass-util-modifier} is not a valid modifier for `#{$jigsass-util-name}`';
+  }
+  @else {
+    align-content: $value;
+
+    $_doclet: $jigsass-util-name + ($jigsass-util-modifier or '');
+    @if (not index($_doclet-store, $_doclet)) {
+      $_doclet-store: append($_doclet-store, $_doclet) !global;
+      // stylelint-disable
+/* ---
+section: Flexbox Utils
+title: Align Content: #{$value}
+order: #{$_jigsass-util-flex-i + map-get($_jigsass-util-flex-addition, $jigsass-util-name)}
+---
+**.#{$jigsass-util-name}--#{$jigsass-util-modifier}**
+
+A utility class for setting an element's `align-content` value to #{$value}.
+
+#### Include with:
+
+```scss
+@include jigsass-util(#{$jigsass-util-name}, $modifier: #{$jigsass-util-modifier} [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper demo-wrap u-ac--#{$jigsass-util-modifier}" style="height: 15rem;">
+  <div class="fpo" style="width: 40%;"></div>
+  <div class="fpo" style="width: 40%;"></div>
+  <div class="fpo" style="width: 40%;"></div>
+  <div class="fpo" style="width: 40%;"></div>
+</div>
+```
+*/
+      // stylelint-enable
+      $_jigsass-util-flex-i: $_jigsass-util-flex-i + 1 !global;
+    }
+  }
+}
+
+
+@include jigsass-define-util(u-ai) {
+  @if (not $jigsass-util-modifier) {
+    @error 'jigsass-utils-flexbox: #{$jigsass-util-name} must be passed an alignment ' +
+      'value through a modifier.';
+  }
+
+  $value: map-get($_jigsass-flex-ai-vals, $jigsass-util-modifier);
+
+  @if (not $value) {
+    @warn '#{$jigsass-util-modifier} is not a valid modifier for `#{$jigsass-util-name}`';
+  }
+  @else {
+    align-items: $value;
+
+    $_doclet: $jigsass-util-name + ($jigsass-util-modifier or '');
+    @if (not index($_doclet-store, $_doclet)) {
+      $_doclet-store: append($_doclet-store, $_doclet) !global;
+      // stylelint-disable
+/* ---
+section: Flexbox Utils
+title: Align Items: #{$value}
+order: #{$_jigsass-util-flex-i + map-get($_jigsass-util-flex-addition, $jigsass-util-name)}
+---
+**.#{$jigsass-util-name}--#{$jigsass-util-modifier}**
+
+A utility class for setting an element's `align-items` value to #{$value}.
+
+#### Include with:
+
+```scss
+@include jigsass-util(#{$jigsass-util-name}, $modifier: #{$jigsass-util-modifier} [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper u-ai--#{$jigsass-util-modifier}">
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te.
+  </div>
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  </div>
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  </div>
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  </div>
+</div>
+```
+*/
+      // stylelint-enable
+      $_jigsass-util-flex-i: $_jigsass-util-flex-i + 1 !global;
+    }
+  }
+}
+
+
+@include jigsass-define-util(u-as) {
+  @if (not $jigsass-util-modifier) {
+    @error 'jigsass-utils-flexbox: #{$jigsass-util-name} must be passed an alignment ' +
+      'value through a modifier.';
+  }
+
+  $value: map-get($_jigsass-flex-as-vals, $jigsass-util-modifier);
+
+  @if (not $value) {
+    @warn '#{$jigsass-util-modifier} is not a valid modifier for `#{$jigsass-util-name}`';
+  }
+  @else {
+    align-self: $value;
+
+    $_doclet: $jigsass-util-name + ($jigsass-util-modifier or '');
+    @if (not index($_doclet-store, $_doclet)) {
+      $_doclet-store: append($_doclet-store, $_doclet) !global;
+      // stylelint-disable
+/* ---
+section: Flexbox Utils
+title: Align Self: #{$value}
+order: #{$_jigsass-util-flex-i + map-get($_jigsass-util-flex-addition, $jigsass-util-name)}
+---
+**.#{$jigsass-util-name}--#{$jigsass-util-modifier}**
+
+A utility class for setting an element's `align-self` value to #{$value}.
+
+#### Include with:
+
+```scss
+@include jigsass-util(#{$jigsass-util-name}, $modifier: #{$jigsass-util-modifier} [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper" style="align-items: #{if($jigsass-util-modifier == fs, 'flex-end', 'flex-start')}";>
+  <div class="fpo" style="width: 25%">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  </div>
+  <div class="fpo u-as--#{$jigsass-util-modifier}" style="width: 25%">
+    This element's <code>align-self</code> property is set to <code>#{$value}</code>
+  </div>
+  <div class="fpo" style="width: 25%">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  </div>
+  <div class="fpo" style="width: 25%">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  </div>
+</div>
+```
+*/
+      // stylelint-enable
+      $_jigsass-util-flex-i: $_jigsass-util-flex-i + 1 !global;
+    }
+  }
+}
+
+
+@include jigsass-define-util(u-jc) {
+  @if (not $jigsass-util-modifier) {
+    @error 'jigsass-utils-flexbox: #{$jigsass-util-name} must be passed an alignment ' +
+      'value through a modifier.';
+  }
+
+  $value: map-get($_jigsass-flex-jc-vals, $jigsass-util-modifier);
+
+  @if (not $value) {
+    @warn '#{$jigsass-util-modifier} is not a valid modifier for `#{$jigsass-util-name}`';
+  }
+  @else {
+    justify-content: $value;
+
+    $_doclet: $jigsass-util-name + ($jigsass-util-modifier or '');
+    @if (not index($_doclet-store, $_doclet)) {
+      $_doclet-store: append($_doclet-store, $_doclet) !global;
+      // stylelint-disable
+/* ---
+section: Flexbox Utils
+title: Justify Content: #{$value}
+order: #{$_jigsass-util-flex-i + map-get($_jigsass-util-flex-addition, $jigsass-util-name)}
+---
+**.#{$jigsass-util-name}--#{$jigsass-util-modifier}**
+
+A utility class for setting an element's `justify-content` value to #{$value}.
+
+#### Include with:
+
+```scss
+@include jigsass-util(#{$jigsass-util-name}, $modifier: #{$jigsass-util-modifier} [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper u-jc--#{$jigsass-util-modifier}">
+  <div class="fpo" style="width: 33%"></div>
+  <div class="fpo" style="width: 33%"></div>
+</div>
+```
+*/
+      // stylelint-enable
+      $_jigsass-util-flex-i: $_jigsass-util-flex-i + 1 !global;
+    }
+  }
+}
+
+
+@include jigsass-define-util(u-fb) {
+  @if (not $jigsass-util-modifier) {
+    @error 'jigsass-utils-flexbox: #{$jigsass-util-name} must be passed a ' +
+      'value through a modifier.';
+  }
+
+  $value: if(
+    $jigsass-util-modifier == a,
+    auto,
+    if(type-of($jigsass-util-modifier) == number, $jigsass-util-modifier, false)
+  );
+
+  @if (not $value) {
+    @warn 'values for `flex-basis` can only be `auto` or a length. You are trying to pass ' +
+      '`#{$jigsass-util-modifier}`, which is a #{type-of($jigsass-util-modifier)}.';
+  }
+  @else {
+    flex-basis: $value;
+
+    $_doclet: $jigsass-util-name + ($jigsass-util-modifier or '');
+    @if (not index($_doclet-store, $_doclet)) {
+      $_doclet-store: append($_doclet-store, $_doclet) !global;
+      // stylelint-disable
+/* ---
+section: Flexbox Utils
+title: Flex Basis: #{$value}
+order: #{$_jigsass-util-flex-i + map-get($_jigsass-util-flex-addition, $jigsass-util-name)}
+---
+**.#{$jigsass-util-name}--#{$jigsass-util-modifier}**
+
+A utility class for setting an element's `flex-basis` value to #{$value}.
+
+#### Include with:
+
+```scss
+@include jigsass-util(#{$jigsass-util-name}, $modifier: #{$jigsass-util-modifier} [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper">
+  <div class="fpo"></div>
+  <div class="fpo  u-fb--#{$jigsass-util-modifier}">flex-basis: #{$jigsass-util-modifier}</div>
+  <div class="fpo"></div>
+</div>
+```
+*/
+      // stylelint-enable
+      $_jigsass-util-flex-i: $_jigsass-util-flex-i + 1 !global;
+    }
+  }
+}
+
+
+@include jigsass-define-util(u-fxg) {
+  @if (not $jigsass-util-modifier) {
+    @error 'jigsass-utils-flexbox: #{$jigsass-util-name} must be passed a unitless number' +
+      'as a modifier.';
+  }
+
+  $value: if(
+    type-of($jigsass-util-modifier) == number and unitless($jigsass-util-modifier),
+    $jigsass-util-modifier,
+    false
+  );
+
+  @if (not $value) {
+    @warn 'values for `flex-grow` can only be a unitless number. ' +
+      '`#{$jigsass-util-modifier}`, is a #{type-of($jigsass-util-modifier)}.';
+  }
+  @else {
+    flex-grow: $value;
+
+    $_doclet: $jigsass-util-name + ($jigsass-util-modifier or '');
+    @if (not index($_doclet-store, $_doclet)) {
+      $_doclet-store: append($_doclet-store, $_doclet) !global;
+      // stylelint-disable
+/* ---
+section: Flexbox Utils
+title: Flex Grow: #{$value}
+order: #{$_jigsass-util-flex-i + map-get($_jigsass-util-flex-addition, $jigsass-util-name)}
+---
+**.#{$jigsass-util-name}--#{$jigsass-util-modifier}**
+
+A utility class for setting an element's `flex-grow` value to #{$value}.
+
+#### Include with:
+
+```scss
+@include jigsass-util(#{$jigsass-util-name}, $modifier: #{$jigsass-util-modifier} [, $from, $until, $misc]);
+```
+*/
+      // stylelint-enable
+      $_jigsass-util-flex-i: $_jigsass-util-flex-i + 1 !global;
+    }
+  }
+}
+
+
+@include jigsass-define-util(u-fxsh) {
+  @if (not $jigsass-util-modifier) {
+    @error 'jigsass-utils-flexbox: #{$jigsass-util-name} must be passed a unitless number' +
+      'as a modifier.';
+  }
+
+  $value: if(
+    type-of($jigsass-util-modifier) == number and unitless($jigsass-util-modifier),
+    $jigsass-util-modifier,
+    false
+  );
+
+  @if (not $value) {
+    @warn 'values for `flex-shrink` can only be a unitless number. ' +
+      '`#{$jigsass-util-modifier}`, is a #{type-of($jigsass-util-modifier)}.';
+  }
+  @else {
+    flex-shrink: $value;
+
+    $_doclet: $jigsass-util-name + ($jigsass-util-modifier or '');
+    @if (not index($_doclet-store, $_doclet)) {
+      $_doclet-store: append($_doclet-store, $_doclet) !global;
+      // stylelint-disable
+/* ---
+section: Flexbox Utils
+title: Flex Shrink: #{$value}
+order: #{$_jigsass-util-flex-i + map-get($_jigsass-util-flex-addition, $jigsass-util-name)}
+---
+**.#{$jigsass-util-name}--#{$jigsass-util-modifier}**
+
+A utility class for setting an element's `flex-shrink` value to #{$value}.
+
+#### Include with:
+
+```scss
+@include jigsass-util(#{$jigsass-util-name}, $modifier: #{$jigsass-util-modifier} [, $from, $until, $misc]);
+```
+*/
+      // stylelint-enable
+      $_jigsass-util-flex-i: $_jigsass-util-flex-i + 1 !global;
+    }
+  }
+}
+
+
+@include jigsass-define-util(u-fxw) {
+  @if (not $jigsass-util-modifier) {
+    @error 'jigsass-utils-flexbox: #{$jigsass-util-name} must be passed a ' +
+      'value through a modifier.';
+  }
+
+  $value: map-get($_jigsass-flex-fxw-vals, $jigsass-util-modifier);
+
+  @if (not $value) {
+    @warn '#{$jigsass-util-modifier} is not a valid modifier for `#{$jigsass-util-name}`';
+  }
+  @else {
+    flex-wrap: $value;
+
+    $_doclet: $jigsass-util-name + ($jigsass-util-modifier or '');
+    @if (not index($_doclet-store, $_doclet)) {
+      $_doclet-store: append($_doclet-store, $_doclet) !global;
+      // stylelint-disable
+/* ---
+section: Flexbox Utils
+title: Flex Wrap: #{$value}
+order: #{$_jigsass-util-flex-i + map-get($_jigsass-util-flex-addition, $jigsass-util-name)}
+---
+**.#{$jigsass-util-name}--#{$jigsass-util-modifier}**
+
+A utility class for setting an element's `flex-wrap` value to #{$value}.
+
+#### Include with:
+
+```scss
+@include jigsass-util(#{$jigsass-util-name}, $modifier: #{$jigsass-util-modifier} [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper u-fxw--#{$jigsass-util-modifier}">
+  <div class="fpo" style="width: 40%"></div>
+  <div class="fpo" style="width: 40%"></div>
+  <div class="fpo" style="width: 40%"></div>
+</div>
+```
+*/
+      // stylelint-enable
+      $_jigsass-util-flex-i: $_jigsass-util-flex-i + 1 !global;
+    }
+  }
+}
+
+
+@include jigsass-define-util(u-fxd) {
+  @if (not $jigsass-util-modifier) {
+    @error 'jigsass-utils-flexbox: #{$jigsass-util-name} must be passed a ' +
+      'value through a modifier.';
+  }
+
+  $value: map-get($_jigsass-flex-fxd-vals, $jigsass-util-modifier);
+
+  @if (not $value) {
+    @warn '#{$jigsass-util-modifier} is not a valid modifier for `#{$jigsass-util-name}`';
+  }
+  @else {
+    flex-direction: $value;
+
+    $_doclet: $jigsass-util-name + ($jigsass-util-modifier or '');
+    @if (not index($_doclet-store, $_doclet)) {
+      $_doclet-store: append($_doclet-store, $_doclet) !global;
+      // stylelint-disable
+/* ---
+section: Flexbox Utils
+title: Flex Direction: #{$value}
+order: #{$_jigsass-util-flex-i + map-get($_jigsass-util-flex-addition, $jigsass-util-name)}
+---
+**.#{$jigsass-util-name}--#{$jigsass-util-modifier}**
+
+A utility class for setting an element's `flex-direction` value to #{$value}.
+
+#### Include with:
+
+```scss
+@include jigsass-util(#{$jigsass-util-name}, $modifier: #{$jigsass-util-modifier} [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper u-fxd--#{$jigsass-util-modifier}">
+  <div class="fpo">item 1</div>
+  <div class="fpo">item 2</div>
+  <div class="fpo">item 3</div>
+</div>
+```
+*/
+      // stylelint-enable
+      $_jigsass-util-flex-i: $_jigsass-util-flex-i + 1 !global;
+    }
+  }
+}
+
+
+@include jigsass-define-util(u-ord) {
+  @if (not $jigsass-util-modifier) {
+    @error 'jigsass-utils-flexbox: #{$jigsass-util-name} must be passed a ' +
+      'number as a modifier.';
+  }
+
+  $value: $jigsass-util-modifier;
+
+  @if (type-of($value) == string and str-index($value, min-) == 1) {
+    $_num: str-slice($value, 5);
+    $value: -1 * jigsass-str-to-number($_num);
+  }
+
+  @if (type-of($value) != number) {
+    @warn '#{$jigsass-util-modifier} is not a valid modifier for `#{$jigsass-util-name}`';
+  }
+  @else {
+    order: $value;
+
+    $_doclet: $jigsass-util-name + ($jigsass-util-modifier or '');
+    @if (not index($_doclet-store, $_doclet)) {
+      $_doclet-store: append($_doclet-store, $_doclet) !global;
+      // stylelint-disable
+/* ---
+section: Flexbox Utils
+title:  Order:  #{$value}
+order: #{$_jigsass-util-flex-i + map-get($_jigsass-util-flex-addition, $jigsass-util-name)}
+---
+**.#{$jigsass-util-name}--#{$jigsass-util-modifier}**
+
+A utility class for setting an element's `flex-direction` value to #{$value}.
+
+#### Include with:
+
+```scss
+@include jigsass-util(#{$jigsass-util-name}, $modifier: #{$jigsass-util-modifier} [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper">
+  <div class="fpo  fpo--b">item 1</div>
+  <div class="[ fpo fpo--b ] u-ord--#{$jigsass-util-modifier}">item 2</div>
+  <div class="fpo fpo--b">item 3</div>
+</div>
+```
+*/
+      // stylelint-enable
+      $_jigsass-util-flex-i: $_jigsass-util-flex-i + 1 !global;
+    }
+  }
+}

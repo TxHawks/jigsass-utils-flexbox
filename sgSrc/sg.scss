@@ -1,0 +1,140 @@
+// *************************************
+//
+// # jigsass-utils-flexbox style guide generator
+// -> It is a best practice for JigSass modules to
+//    not automatically generate css and documentation
+//    on `@import`. Please use this file to enable css
+//    (and comments) generation.
+//
+//    Files in `sgSrc/assets` will be available
+//    for use in the style guide
+//
+// *************************************
+
+@charset 'UTF-8';
+
+// --------------------
+// Dependencies
+// --------------------
+@import '../node_modules/jigsass-tools-maps/scss/index';
+@import '../node_modules/jigsass-tools-mq/scss/index';
+@import '../node_modules/jigsass-tools-typography/scss/index';
+@import '../node_modules/jigsass-tools-strings/scss/index';
+@import '../node_modules/jigsass-tools-bidi/scss/index';
+@import '../node_modules/jigsass-tools-selectors/scss/index';
+
+
+
+
+
+// --------------------
+// Styles
+// --------------------
+
+// Align content
+@include jigsass-util(u-ac, $modifier: c);
+@include jigsass-util(u-ac, $modifier: fe);
+@include jigsass-util(u-ac, $modifier: fs);
+@include jigsass-util(u-ac, $modifier: s);
+@include jigsass-util(u-ac, $modifier: sa);
+@include jigsass-util(u-ac, $modifier: sb);
+
+// Align items
+@include jigsass-util(u-ai, $modifier: b);
+@include jigsass-util(u-ai, $modifier: c);
+@include jigsass-util(u-ai, $modifier: fe);
+@include jigsass-util(u-ai, $modifier: fs);
+@include jigsass-util(u-ai, $modifier: s);
+
+// Align self
+@include jigsass-util(u-as, $modifier: a);
+@include jigsass-util(u-as, $modifier: b);
+@include jigsass-util(u-as, $modifier: c);
+@include jigsass-util(u-as, $modifier: fe);
+@include jigsass-util(u-as, $modifier: fs);
+@include jigsass-util(u-as, $modifier: s);
+
+// Align content
+@include jigsass-util(u-jc, $modifier: c);
+@include jigsass-util(u-jc, $modifier: fe);
+@include jigsass-util(u-jc, $modifier: fs);
+@include jigsass-util(u-jc, $modifier: sa);
+@include jigsass-util(u-jc, $modifier: sb);
+
+// Flex basis
+@include jigsass-util(u-fb, $modifier: a);
+@include jigsass-util(u-fb, $modifier: 25%);
+@include jigsass-util(u-fb, $modifier: 50%);
+@include jigsass-util(u-fb, $modifier: 75%);
+
+// Flex Grow
+@include jigsass-util(u-fxg, $modifier: 1);
+
+// Flex Shrink
+@include jigsass-util(u-fxsh, $modifier: 1);
+
+// Flex Wrap
+@include jigsass-util(u-fxw, $modifier: n);
+@include jigsass-util(u-fxw, $modifier: w);
+@include jigsass-util(u-fxw, $modifier: wr);
+
+// Flex Direction
+@include jigsass-util(u-fxd, $modifier: c);
+@include jigsass-util(u-fxd, $modifier: cr);
+@include jigsass-util(u-fxd, $modifier: r);
+@include jigsass-util(u-fxd, $modifier: rr);
+
+// Order
+@include jigsass-util(u-ord, $modifier: min-1);
+@include jigsass-util(u-ord, $modifier: 1);
+
+@import 'index.scss';
+
+
+
+// --------------------
+// Demo Styles
+// --------------------
+
+$jigsass-mdcss-brand-color: #09a5d9;
+@include jigsass-set-baseline;
+
+html {
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0 !important;
+}
+
+.demo-wrapper {
+  display: flex;
+  background-color: paleturquoise;
+}
+.demo-wrap {
+  flex-wrap: wrap;
+}
+
+.fpo {
+   background-color: $jigsass-mdcss-brand-color;
+   color: #fff;
+   margin: 1rem;
+   padding: 1rem;
+}
+.fpo {
+  flex-grow: 1;
+}
+
+figure,
+ul,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+

@@ -1,0 +1,1185 @@
+<!doctype html>
+<title>jigsass-utils-flexbox</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="style.css?05" rel="stylesheet">
+<link href="jigsass-logo.png" rel="shortcut icon">
+<script type="text/javascript">WebFontConfig={google:{families:["Roboto:400,100,300,500:latin"]}},function(){var e=document.createElement("script");e.src="https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js",e.type="text/javascript",e.async="true";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}();</script>
+<script>examples={"base":"","target":"_self","css":["assets/sg.css"],"js":[],"bodyjs":[],"htmlcss":"background:none;border:0;clip:auto;display:block;height:auto;margin:0;padding:0;position:static;width:auto","bodycss":"background:none;border:0;clip:auto;display:block;height:auto;margin:0;padding:0;position:static;width:auto"};</script>
+
+<header>
+	<nav>
+		<img src="jigsass-logo.png" alt="jigsass-utils-flexbox">
+		
+	<ul>
+		
+				<li>
+					<a href="#flexbox-utils"><span>Flexbox Utils</span></a>
+					
+	<ul>
+		
+				<li>
+					<a href="#introduction"><span>Introduction</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#align-content-center"><span>Align Content: center</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#align-content-flex-end"><span>Align Content: flex-end</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#align-content-flex-start"><span>Align Content: flex-start</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#align-content-stretch"><span>Align Content: stretch</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#align-content-space-around"><span>Align Content: space-around</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#align-content-space-between"><span>Align Content: space-between</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#align-items-baseline"><span>Align Items: baseline</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#align-items-center"><span>Align Items: center</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#align-items-flex-end"><span>Align Items: flex-end</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#align-items-flex-start"><span>Align Items: flex-start</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#align-items-stretch"><span>Align Items: stretch</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#align-self-auto"><span>Align Self: auto</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#align-self-baseline"><span>Align Self: baseline</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#align-self-center"><span>Align Self: center</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#align-self-flex-end"><span>Align Self: flex-end</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#align-self-flex-start"><span>Align Self: flex-start</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#align-self-stretch"><span>Align Self: stretch</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#justify-content-center"><span>Justify Content: center</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#justify-content-flex-end"><span>Justify Content: flex-end</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#justify-content-flex-start"><span>Justify Content: flex-start</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#justify-content-space-around"><span>Justify Content: space-around</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#justify-content-space-between"><span>Justify Content: space-between</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#flex-basis-auto"><span>Flex Basis: auto</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#flex-basis-25"><span>Flex Basis: 25%</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#flex-basis-50"><span>Flex Basis: 50%</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#flex-basis-75"><span>Flex Basis: 75%</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#flex-grow-1"><span>Flex Grow: 1</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#flex-shrink-1"><span>Flex Shrink: 1</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#flex-wrap-nowrap"><span>Flex Wrap: nowrap</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#flex-wrap-wrap"><span>Flex Wrap: wrap</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#flex-wrap-wrap-reverse"><span>Flex Wrap: wrap-reverse</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#flex-direction-column"><span>Flex Direction: column</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#flex-direction-column-reverse"><span>Flex Direction: column-reverse</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#flex-direction-row"><span>Flex Direction: row</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#flex-direction-row-reverse"><span>Flex Direction: row-reverse</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#order--1"><span>Order:  -1</span></a>
+					
+				</li>
+				
+				<li>
+					<a href="#order-1"><span>Order:  1</span></a>
+					
+				</li>
+				
+	</ul>
+	
+				</li>
+				
+	</ul>
+	
+	</nav>
+</header>
+
+<main>
+	
+		<section id="flexbox-utils">
+			<h2>Flexbox Utils</h2>
+			<div>
+				
+				
+		<section id="introduction">
+			<h3>Introduction</h3>
+			<div>
+				<p>A collection of dynamically generated flexbox-related utility classes.</p>
+<h4 id="installation">Installation</h4>
+<p>Using npm:</p>
+<pre><code class="lang-sh">npm i -S jigsass-utils-flexbox
+</code></pre>
+<h4 id="available-classes">Available classes</h4>
+<p>Class names follow the <a href="http://docs.emmet.io/cheat-sheet/">Emmet</a> abbreviation
+syntax, with colons (&#39;:&#39;) replaced by two dashes (<code>--</code>) to follow BEM naming
+conventions.
+E.g., the <code>justify-content: space-around</code> utility class name is <code>.u-jc--sa</code>.</p>
+<ul>
+<li><code>.u-ac--c</code> (align-content: center)</li>
+<li><code>.u-ac--fe</code> (align-content: flex-end)</li>
+<li><code>.u-ac--fs</code> (align-content: flex-start)</li>
+<li><code>.u-ac--s</code> (align-content: stretch)</li>
+<li><code>.u-ac--sa</code> (align-content: space-around)</li>
+<li><code>.u-ac--sb</code> (align-content: space-between)</li>
+</ul>
+<ul>
+<li><code>.u-ai--b</code> (align-items: baseline)</li>
+<li><code>.u-ai--c</code> (align-items: center)</li>
+<li><code>.u-ai--fe</code> (align-items: flex-end)</li>
+<li><code>.u-ai--fs</code> (align-items: flex-start)</li>
+<li><code>.u-ai--s</code> (align-items: stretch)</li>
+</ul>
+<ul>
+<li><code>.u-as--a</code> (align-self: auto)</li>
+<li><code>.u-as--b</code> (align-self: baseline)</li>
+<li><code>.u-as--c</code> (align-self: center)</li>
+<li><code>.u-as--fe</code> (align-self: flex-end)</li>
+<li><code>.u-as--fs</code> (align-self: flex-start)</li>
+<li><code>.u-as--s</code> (align-self: stretch)</li>
+</ul>
+<ul>
+<li><code>.u-jc--c</code> (justify-content: center)</li>
+<li><code>.u-jc--fe</code> (justify-content: flex-end)</li>
+<li><code>.u-jc--fs</code> (justify-content: flex-start)</li>
+<li><code>.u-jc--sa</code> (justify-content: space-around)</li>
+<li><code>.u-jc--sb</code> (justify-content: space-between)</li>
+</ul>
+<ul>
+<li><code>.u-fb--a</code> (flex-basis: auto)</li>
+<li><code>.u-fb--&lt;width&gt;</code> (flex-basis: &lt;width&gt;)</li>
+</ul>
+<ul>
+<li><code>.u-fxg--&lt;number&gt;</code> (flex-grow: &lt;number&gt;)</li>
+<li><code>.u-fxsh--&lt;number&gt;</code> (flex-shrink: &lt;number&gt;)</li>
+</ul>
+<ul>
+<li><code>.u-fxw--n</code> (flex-wrap: nowrap)</li>
+<li><code>.u-fxw--w</code> (flex-wrap: wrap)</li>
+<li><code>.u-fxw--wr</code> (flex-wrap: wrap-reverse)</li>
+</ul>
+<ul>
+<li><code>.u-fxd--c</code> (flex-direction: column)</li>
+<li><code>.u-fxd--cr</code> (flex-direction: column-reverse)</li>
+<li><code>.u-fxd--r</code> (flex-direction: row)</li>
+<li><code>.u-fxd--rr</code> (flex-direction: row-reverse)</li>
+</ul>
+<ul>
+<li><code>.u-ord--&lt;number&gt;</code> (order: &lt;number&gt;)</li>
+<li><code>.u-ord--min-&lt;number&gt;</code> (order: -&lt;number&gt;)</li>
+</ul>
+<h4 id="usage">Usage</h4>
+<p>Import JigSass Utils Flexbox into your main scss file near its very end, together with all
+other utilities (utilities should always be the last to be imported).</p>
+<pre><code class="lang-scss">@import &#39;path/to/jigsass-utils-flexbox/scss/index&#39;;
+</code></pre>
+<p>Like all other JigSass Utils, JigSass Flexbox does not automatically generate any CSS
+when imported. You would need to explicitly indicate that each individual flexbox
+class should actually be generated in each component or object it is used in
+(clarification: This will include style declarations inside <code>.foo</code> and .<code>bar</code>):</p>
+<pre><code class="lang-scss">// _c.foo.scss
+.foo {
+  @include jigsass-util(u-ord, $modifier: 1); // &lt;-- order: 1
+
+  ...
+}
+</code></pre>
+<pre><code class="lang-scss">// _c.bar.scss
+.bar {
+  @include jigsass-util(u-jc, $modifier: fe);  // &lt;-- justify-content: flex-end
+  @include jigsass-util(u-ord, $modifier: min-1, $from: large); // &lt;-- ordr: -1 from large bp and on.
+
+  ...
+}
+</code></pre>
+<p>Doing so helps us a great deal with portability, as no matter where we import component or object
+partials, the correct utility classes will be generated. Think of it as a poor man&#39;s dependency
+management.</p>
+<p>Developer communication is also assisted by including &quot;dependencies&quot; wherever they are required,
+as anyone going through a partial, can easily understand how it should be marked up with just a
+glance.</p>
+<p>As far as bloat goes, just don&#39;t worry about it - the actual styles will only be generated once,
+at the location in the cascade where the Jigsass Flexbox partial was imported into the main file.</p>
+<p>JigSass Flexbox classes are responsive-enabled, using <a href="https://txhawks.github.io/jigsass-tools-mq/">JigSass MQ</a>
+and the breakpoints defined in the <a href="https://txhawks.github.io/jigsass-tools-mq/#variable-jigsass-breakpoints">$jigsass-breakpoints</a> variable.</p>
+<p>Based on the breakpoint arguments passed to <code>jigsass-util</code> when including a flexbox class, responsive
+modifiers are generated according to the following logic:</p>
+<pre><code class="lang-scss">.u-&lt;util&gt;--&lt;modifier&gt;[-[-from-&lt;breakpoint-name&gt;][-until-&lt;breakpoint-name&gt;][-misc-&lt;breakpoint-name&gt;]]
+</code></pre>
+<p>So, assuming the <code>medium</code>, <code>large</code> and <code>landscape</code> breakpoints are defined in <code>$jigsass-breakpoints</code>
+as <code>600px</code>, <code>1024px</code> and <code>(orientation: landscape)</code> respectively,</p>
+<pre><code class="lang-scss">@include jigsass-util(u-ord, $modifier: 2);
+</code></pre>
+<p>will generate the <code>.u-ord--2</code> class, which is not limited to any media-query.</p>
+<pre><code class="lang-scss">@include jigsass-util(u-ord, $modifier: 2, $until: medium);
+</code></pre>
+<p>will generate the <code>.u-ord--2--until-medium</code> class, which will be in effect at
+<code>(max-width: 37.49em)</code> and will override styles in the default class until that point.</p>
+<pre><code class="lang-scss">@include jigsass-util(u-ord, $modifier: min2, $from: large, $misc: landscape);
+</code></pre>
+<p>will generate the <code>.u-ord-min2--from-large-when-landscape</code> class, which will go into
+effect at <code>(min-width: 64em) and (orientation: landscape)</code> and will override styles in the default
+class under these  conditions.</p>
+<p><strong>License:</strong> MIT</p>
+
+				
+			</div>
+		</section>
+		
+		<section id="align-content-center">
+			<h3>Align Content: center</h3>
+			<div>
+				<p><strong>.u-ac--c</strong></p>
+<p>A utility class for setting an element&#39;s <code>align-content</code> value to center.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-ac, $modifier: c [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper demo-wrap u-ac--c&quot; style=&quot;height: 15rem;&quot;&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="align-content-flex-end">
+			<h3>Align Content: flex-end</h3>
+			<div>
+				<p><strong>.u-ac--fe</strong></p>
+<p>A utility class for setting an element&#39;s <code>align-content</code> value to flex-end.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-ac, $modifier: fe [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper demo-wrap u-ac--fe&quot; style=&quot;height: 15rem;&quot;&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="align-content-flex-start">
+			<h3>Align Content: flex-start</h3>
+			<div>
+				<p><strong>.u-ac--fs</strong></p>
+<p>A utility class for setting an element&#39;s <code>align-content</code> value to flex-start.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-ac, $modifier: fs [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper demo-wrap u-ac--fs&quot; style=&quot;height: 15rem;&quot;&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="align-content-stretch">
+			<h3>Align Content: stretch</h3>
+			<div>
+				<p><strong>.u-ac--s</strong></p>
+<p>A utility class for setting an element&#39;s <code>align-content</code> value to stretch.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-ac, $modifier: s [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper demo-wrap u-ac--s&quot; style=&quot;height: 15rem;&quot;&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="align-content-space-around">
+			<h3>Align Content: space-around</h3>
+			<div>
+				<p><strong>.u-ac--sa</strong></p>
+<p>A utility class for setting an element&#39;s <code>align-content</code> value to space-around.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-ac, $modifier: sa [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper demo-wrap u-ac--sa&quot; style=&quot;height: 15rem;&quot;&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="align-content-space-between">
+			<h3>Align Content: space-between</h3>
+			<div>
+				<p><strong>.u-ac--sb</strong></p>
+<p>A utility class for setting an element&#39;s <code>align-content</code> value to space-between.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-ac, $modifier: sb [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper demo-wrap u-ac--sb&quot; style=&quot;height: 15rem;&quot;&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="align-items-baseline">
+			<h3>Align Items: baseline</h3>
+			<div>
+				<p><strong>.u-ai--b</strong></p>
+<p>A utility class for setting an element&#39;s <code>align-items</code> value to baseline.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-ai, $modifier: b [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper u-ai--b&quot;&gt;
+  &lt;div class=&quot;fpo&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="align-items-center">
+			<h3>Align Items: center</h3>
+			<div>
+				<p><strong>.u-ai--c</strong></p>
+<p>A utility class for setting an element&#39;s <code>align-items</code> value to center.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-ai, $modifier: c [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper u-ai--c&quot;&gt;
+  &lt;div class=&quot;fpo&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="align-items-flex-end">
+			<h3>Align Items: flex-end</h3>
+			<div>
+				<p><strong>.u-ai--fe</strong></p>
+<p>A utility class for setting an element&#39;s <code>align-items</code> value to flex-end.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-ai, $modifier: fe [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper u-ai--fe&quot;&gt;
+  &lt;div class=&quot;fpo&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="align-items-flex-start">
+			<h3>Align Items: flex-start</h3>
+			<div>
+				<p><strong>.u-ai--fs</strong></p>
+<p>A utility class for setting an element&#39;s <code>align-items</code> value to flex-start.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-ai, $modifier: fs [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper u-ai--fs&quot;&gt;
+  &lt;div class=&quot;fpo&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="align-items-stretch">
+			<h3>Align Items: stretch</h3>
+			<div>
+				<p><strong>.u-ai--s</strong></p>
+<p>A utility class for setting an element&#39;s <code>align-items</code> value to stretch.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-ai, $modifier: s [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper u-ai--s&quot;&gt;
+  &lt;div class=&quot;fpo&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="align-self-auto">
+			<h3>Align Self: auto</h3>
+			<div>
+				<p><strong>.u-as--a</strong></p>
+<p>A utility class for setting an element&#39;s <code>align-self</code> value to auto.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-as, $modifier: a [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper&quot; style=&quot;align-items: flex-start&quot;;&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 25%&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo u-as--a&quot; style=&quot;width: 25%&quot;&gt;
+    This element&#39;s &lt;code&gt;align-self&lt;/code&gt; property is set to &lt;code&gt;auto&lt;/code&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 25%&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 25%&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="align-self-baseline">
+			<h3>Align Self: baseline</h3>
+			<div>
+				<p><strong>.u-as--b</strong></p>
+<p>A utility class for setting an element&#39;s <code>align-self</code> value to baseline.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-as, $modifier: b [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper&quot; style=&quot;align-items: flex-start&quot;;&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 25%&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo u-as--b&quot; style=&quot;width: 25%&quot;&gt;
+    This element&#39;s &lt;code&gt;align-self&lt;/code&gt; property is set to &lt;code&gt;baseline&lt;/code&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 25%&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 25%&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="align-self-center">
+			<h3>Align Self: center</h3>
+			<div>
+				<p><strong>.u-as--c</strong></p>
+<p>A utility class for setting an element&#39;s <code>align-self</code> value to center.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-as, $modifier: c [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper&quot; style=&quot;align-items: flex-start&quot;;&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 25%&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo u-as--c&quot; style=&quot;width: 25%&quot;&gt;
+    This element&#39;s &lt;code&gt;align-self&lt;/code&gt; property is set to &lt;code&gt;center&lt;/code&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 25%&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 25%&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="align-self-flex-end">
+			<h3>Align Self: flex-end</h3>
+			<div>
+				<p><strong>.u-as--fe</strong></p>
+<p>A utility class for setting an element&#39;s <code>align-self</code> value to flex-end.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-as, $modifier: fe [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper&quot; style=&quot;align-items: flex-start&quot;;&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 25%&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo u-as--fe&quot; style=&quot;width: 25%&quot;&gt;
+    This element&#39;s &lt;code&gt;align-self&lt;/code&gt; property is set to &lt;code&gt;flex-end&lt;/code&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 25%&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 25%&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="align-self-flex-start">
+			<h3>Align Self: flex-start</h3>
+			<div>
+				<p><strong>.u-as--fs</strong></p>
+<p>A utility class for setting an element&#39;s <code>align-self</code> value to flex-start.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-as, $modifier: fs [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper&quot; style=&quot;align-items: flex-end&quot;;&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 25%&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo u-as--fs&quot; style=&quot;width: 25%&quot;&gt;
+    This element&#39;s &lt;code&gt;align-self&lt;/code&gt; property is set to &lt;code&gt;flex-start&lt;/code&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 25%&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 25%&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="align-self-stretch">
+			<h3>Align Self: stretch</h3>
+			<div>
+				<p><strong>.u-as--s</strong></p>
+<p>A utility class for setting an element&#39;s <code>align-self</code> value to stretch.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-as, $modifier: s [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper&quot; style=&quot;align-items: flex-start&quot;;&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 25%&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo u-as--s&quot; style=&quot;width: 25%&quot;&gt;
+    This element&#39;s &lt;code&gt;align-self&lt;/code&gt; property is set to &lt;code&gt;stretch&lt;/code&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 25%&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  &lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 25%&quot;&gt;
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="justify-content-center">
+			<h3>Justify Content: center</h3>
+			<div>
+				<p><strong>.u-jc--c</strong></p>
+<p>A utility class for setting an element&#39;s <code>justify-content</code> value to center.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-jc, $modifier: c [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper u-jc--c&quot;&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 33%&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 33%&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="justify-content-flex-end">
+			<h3>Justify Content: flex-end</h3>
+			<div>
+				<p><strong>.u-jc--fe</strong></p>
+<p>A utility class for setting an element&#39;s <code>justify-content</code> value to flex-end.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-jc, $modifier: fe [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper u-jc--fe&quot;&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 33%&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 33%&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="justify-content-flex-start">
+			<h3>Justify Content: flex-start</h3>
+			<div>
+				<p><strong>.u-jc--fs</strong></p>
+<p>A utility class for setting an element&#39;s <code>justify-content</code> value to flex-start.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-jc, $modifier: fs [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper u-jc--fs&quot;&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 33%&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 33%&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="justify-content-space-around">
+			<h3>Justify Content: space-around</h3>
+			<div>
+				<p><strong>.u-jc--sa</strong></p>
+<p>A utility class for setting an element&#39;s <code>justify-content</code> value to space-around.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-jc, $modifier: sa [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper u-jc--sa&quot;&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 33%&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 33%&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="justify-content-space-between">
+			<h3>Justify Content: space-between</h3>
+			<div>
+				<p><strong>.u-jc--sb</strong></p>
+<p>A utility class for setting an element&#39;s <code>justify-content</code> value to space-between.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-jc, $modifier: sb [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper u-jc--sb&quot;&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 33%&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 33%&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="flex-basis-auto">
+			<h3>Flex Basis: auto</h3>
+			<div>
+				<p><strong>.u-fb--a</strong></p>
+<p>A utility class for setting an element&#39;s <code>flex-basis</code> value to auto.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-fb, $modifier: a [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper&quot;&gt;
+  &lt;div class=&quot;fpo&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo  u-fb--a&quot;&gt;flex-basis: a&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="flex-basis-25">
+			<h3>Flex Basis: 25%</h3>
+			<div>
+				<p><strong>.u-fb--25%</strong></p>
+<p>A utility class for setting an element&#39;s <code>flex-basis</code> value to 25%.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-fb, $modifier: 25% [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper&quot;&gt;
+  &lt;div class=&quot;fpo&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo  u-fb--25%&quot;&gt;flex-basis: 25%&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="flex-basis-50">
+			<h3>Flex Basis: 50%</h3>
+			<div>
+				<p><strong>.u-fb--50%</strong></p>
+<p>A utility class for setting an element&#39;s <code>flex-basis</code> value to 50%.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-fb, $modifier: 50% [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper&quot;&gt;
+  &lt;div class=&quot;fpo&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo  u-fb--50%&quot;&gt;flex-basis: 50%&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="flex-basis-75">
+			<h3>Flex Basis: 75%</h3>
+			<div>
+				<p><strong>.u-fb--75%</strong></p>
+<p>A utility class for setting an element&#39;s <code>flex-basis</code> value to 75%.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-fb, $modifier: 75% [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper&quot;&gt;
+  &lt;div class=&quot;fpo&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo  u-fb--75%&quot;&gt;flex-basis: 75%&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="flex-grow-1">
+			<h3>Flex Grow: 1</h3>
+			<div>
+				<p><strong>.u-fxg--1</strong></p>
+<p>A utility class for setting an element&#39;s <code>flex-grow</code> value to 1.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-fxg, $modifier: 1 [, $from, $until, $misc]);
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="flex-shrink-1">
+			<h3>Flex Shrink: 1</h3>
+			<div>
+				<p><strong>.u-fxsh--1</strong></p>
+<p>A utility class for setting an element&#39;s <code>flex-shrink</code> value to 1.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-fxsh, $modifier: 1 [, $from, $until, $misc]);
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="flex-wrap-nowrap">
+			<h3>Flex Wrap: nowrap</h3>
+			<div>
+				<p><strong>.u-fxw--n</strong></p>
+<p>A utility class for setting an element&#39;s <code>flex-wrap</code> value to nowrap.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-fxw, $modifier: n [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper u-fxw--n&quot;&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="flex-wrap-wrap">
+			<h3>Flex Wrap: wrap</h3>
+			<div>
+				<p><strong>.u-fxw--w</strong></p>
+<p>A utility class for setting an element&#39;s <code>flex-wrap</code> value to wrap.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-fxw, $modifier: w [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper u-fxw--w&quot;&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="flex-wrap-wrap-reverse">
+			<h3>Flex Wrap: wrap-reverse</h3>
+			<div>
+				<p><strong>.u-fxw--wr</strong></p>
+<p>A utility class for setting an element&#39;s <code>flex-wrap</code> value to wrap-reverse.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-fxw, $modifier: wr [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper u-fxw--wr&quot;&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot; style=&quot;width: 40%&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="flex-direction-column">
+			<h3>Flex Direction: column</h3>
+			<div>
+				<p><strong>.u-fxd--c</strong></p>
+<p>A utility class for setting an element&#39;s <code>flex-direction</code> value to column.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-fxd, $modifier: c [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper u-fxd--c&quot;&gt;
+  &lt;div class=&quot;fpo&quot;&gt;item 1&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;item 2&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;item 3&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="flex-direction-column-reverse">
+			<h3>Flex Direction: column-reverse</h3>
+			<div>
+				<p><strong>.u-fxd--cr</strong></p>
+<p>A utility class for setting an element&#39;s <code>flex-direction</code> value to column-reverse.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-fxd, $modifier: cr [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper u-fxd--cr&quot;&gt;
+  &lt;div class=&quot;fpo&quot;&gt;item 1&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;item 2&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;item 3&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="flex-direction-row">
+			<h3>Flex Direction: row</h3>
+			<div>
+				<p><strong>.u-fxd--r</strong></p>
+<p>A utility class for setting an element&#39;s <code>flex-direction</code> value to row.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-fxd, $modifier: r [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper u-fxd--r&quot;&gt;
+  &lt;div class=&quot;fpo&quot;&gt;item 1&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;item 2&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;item 3&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="flex-direction-row-reverse">
+			<h3>Flex Direction: row-reverse</h3>
+			<div>
+				<p><strong>.u-fxd--rr</strong></p>
+<p>A utility class for setting an element&#39;s <code>flex-direction</code> value to row-reverse.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-fxd, $modifier: rr [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper u-fxd--rr&quot;&gt;
+  &lt;div class=&quot;fpo&quot;&gt;item 1&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;item 2&lt;/div&gt;
+  &lt;div class=&quot;fpo&quot;&gt;item 3&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="order--1">
+			<h3>Order:  -1</h3>
+			<div>
+				<p><strong>.u-ord--min-1</strong></p>
+<p>A utility class for setting an element&#39;s <code>flex-direction</code> value to -1.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-ord, $modifier: min-1 [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper&quot;&gt;
+  &lt;div class=&quot;fpo  fpo--b&quot;&gt;item 1&lt;/div&gt;
+  &lt;div class=&quot;[ fpo fpo--b ] u-ord--min-1&quot;&gt;item 2&lt;/div&gt;
+  &lt;div class=&quot;fpo fpo--b&quot;&gt;item 3&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+		<section id="order-1">
+			<h3>Order:  1</h3>
+			<div>
+				<p><strong>.u-ord--1</strong></p>
+<p>A utility class for setting an element&#39;s <code>flex-direction</code> value to 1.</p>
+<h4 id="include-with-">Include with:</h4>
+<pre><code class="lang-scss">@include jigsass-util(u-ord, $modifier: 1 [, $from, $until, $misc]);
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-example:html">&lt;div class=&quot;demo-wrapper&quot;&gt;
+  &lt;div class=&quot;fpo  fpo--b&quot;&gt;item 1&lt;/div&gt;
+  &lt;div class=&quot;[ fpo fpo--b ] u-ord--1&quot;&gt;item 2&lt;/div&gt;
+  &lt;div class=&quot;fpo fpo--b&quot;&gt;item 3&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+			</div>
+		</section>
+		
+			</div>
+		</section>
+		
+	<footer>Last modified Friday, 15 April 2016 22:11</footer>
+</main>
+<script src="prism.js"></script>
+<script src="examples.js"></script>
+<script src="script.js"></script>
+
