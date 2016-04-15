@@ -1,0 +1,1433 @@
+/* ---
+section: Flexbox Utils
+title: Introduction
+order: -10
+---
+
+A collection of dynamically generated flexbox-related utility classes.
+
+
+#### Installation
+
+Using npm:
+
+```sh
+npm i -S jigsass-utils-flexbox
+```
+
+
+#### Available classes
+
+Class names follow the [Emmet](http://docs.emmet.io/cheat-sheet/) abbreviation
+syntax, with colons (':') replaced by two dashes (`--`) to follow BEM naming
+conventions.
+E.g., the `justify-content: space-around` utility class name is `.u-jc--sa`.
+
+  - `.u-ac--c` (align-content: center)
+  - `.u-ac--fe` (align-content: flex-end)
+  - `.u-ac--fs` (align-content: flex-start)
+  - `.u-ac--s` (align-content: stretch)
+  - `.u-ac--sa` (align-content: space-around)
+  - `.u-ac--sb` (align-content: space-between)
+
+
+  - `.u-ai--b` (align-items: baseline)
+  - `.u-ai--c` (align-items: center)
+  - `.u-ai--fe` (align-items: flex-end)
+  - `.u-ai--fs` (align-items: flex-start)
+  - `.u-ai--s` (align-items: stretch)
+
+
+  - `.u-as--a` (align-self: auto)
+  - `.u-as--b` (align-self: baseline)
+  - `.u-as--c` (align-self: center)
+  - `.u-as--fe` (align-self: flex-end)
+  - `.u-as--fs` (align-self: flex-start)
+  - `.u-as--s` (align-self: stretch)
+
+
+  - `.u-jc--c` (justify-content: center)
+  - `.u-jc--fe` (justify-content: flex-end)
+  - `.u-jc--fs` (justify-content: flex-start)
+  - `.u-jc--sa` (justify-content: space-around)
+  - `.u-jc--sb` (justify-content: space-between)
+
+
+  - `.u-fb--a` (flex-basis: auto)
+  - `.u-fb--<width>` (flex-basis: &lt;width>)
+
+
+  - `.u-fxg--<number>` (flex-grow: &lt;number>)
+  - `.u-fxsh--<number>` (flex-shrink: &lt;number>)
+
+
+  - `.u-fxw--n` (flex-wrap: nowrap)
+  - `.u-fxw--w` (flex-wrap: wrap)
+  - `.u-fxw--wr` (flex-wrap: wrap-reverse)
+
+
+  - `.u-fxd--c` (flex-direction: column)
+  - `.u-fxd--cr` (flex-direction: column-reverse)
+  - `.u-fxd--r` (flex-direction: row)
+  - `.u-fxd--rr` (flex-direction: row-reverse)
+
+
+  - `.u-ord--<number>` (order: &lt;number>)
+  - `.u-ord--min-<number>` (order: -&lt;number>)
+
+
+#### Usage
+Import JigSass Utils Flexbox into your main scss file near its very end, together with all
+other utilities (utilities should always be the last to be imported).
+
+```scss
+@import 'path/to/jigsass-utils-flexbox/scss/index';
+```
+
+Like all other JigSass Utils, JigSass Flexbox does not automatically generate any CSS
+when imported. You would need to explicitly indicate that each individual flexbox
+class should actually be generated in each component or object it is used in
+(clarification: This will include style declarations inside `.foo` and .`bar`):
+
+```scss
+// _c.foo.scss
+.foo {
+  @include jigsass-util(u-ord, $modifier: 1); // <-- order: 1
+
+  ...
+}
+```
+
+```scss
+// _c.bar.scss
+.bar {
+  @include jigsass-util(u-jc, $modifier: fe);  // <-- justify-content: flex-end
+  @include jigsass-util(u-ord, $modifier: min-1, $from: large); // <-- ordr: -1 from large bp and on.
+
+  ...
+}
+```
+
+Doing so helps us a great deal with portability, as no matter where we import component or object
+partials, the correct utility classes will be generated. Think of it as a poor man's dependency
+management.
+
+Developer communication is also assisted by including "dependencies" wherever they are required,
+as anyone going through a partial, can easily understand how it should be marked up with just a
+glance.
+
+As far as bloat goes, just don't worry about it - the actual styles will only be generated once,
+at the location in the cascade where the Jigsass Flexbox partial was imported into the main file.
+
+
+JigSass Flexbox classes are responsive-enabled, using [JigSass MQ](https://txhawks.github.io/jigsass-tools-mq/)
+and the breakpoints defined in the [$jigsass-breakpoints](https://txhawks.github.io/jigsass-tools-mq/#variable-jigsass-breakpoints) variable.
+
+Based on the breakpoint arguments passed to `jigsass-util` when including a flexbox class, responsive
+modifiers are generated according to the following logic:
+
+```scss
+.u-<util>--<modifier>[-[-from-<breakpoint-name>][-until-<breakpoint-name>][-misc-<breakpoint-name>]]
+```
+
+So, assuming the `medium`, `large` and `landscape` breakpoints are defined in `$jigsass-breakpoints`
+as `600px`, `1024px` and `(orientation: landscape)` respectively,
+
+```scss
+@include jigsass-util(u-ord, $modifier: 2);
+```
+will generate the `.u-ord--2` class, which is not limited to any media-query.
+
+```scss
+@include jigsass-util(u-ord, $modifier: 2, $until: medium);
+```
+
+will generate the `.u-ord--2--until-medium` class, which will be in effect at
+`(max-width: 37.49em)` and will override styles in the default class until that point.
+
+```scss
+@include jigsass-util(u-ord, $modifier: min2, $from: large, $misc: landscape);
+```
+
+will generate the `.u-ord-min2--from-large-when-landscape` class, which will go into
+effect at `(min-width: 64em) and (orientation: landscape)` and will override styles in the default
+class under these  conditions.
+
+
+**License:** MIT
+
+*/
+.u-ac--c {
+  -webkit-align-content: center;
+      -ms-flex-line-pack: center;
+          align-content: center;
+  /* ---
+section: Flexbox Utils
+title: Align Content: center
+order: 1
+---
+**.u-ac--c**
+
+A utility class for setting an element's `align-content` value to center.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-ac, $modifier: c [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper demo-wrap u-ac--c" style="height: 15rem;">
+  <div class="fpo" style="width: 40%;"></div>
+  <div class="fpo" style="width: 40%;"></div>
+  <div class="fpo" style="width: 40%;"></div>
+  <div class="fpo" style="width: 40%;"></div>
+</div>
+```
+*/
+}
+
+.u-ac--fe {
+  -webkit-align-content: flex-end;
+      -ms-flex-line-pack: end;
+          align-content: flex-end;
+  /* ---
+section: Flexbox Utils
+title: Align Content: flex-end
+order: 2
+---
+**.u-ac--fe**
+
+A utility class for setting an element's `align-content` value to flex-end.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-ac, $modifier: fe [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper demo-wrap u-ac--fe" style="height: 15rem;">
+  <div class="fpo" style="width: 40%;"></div>
+  <div class="fpo" style="width: 40%;"></div>
+  <div class="fpo" style="width: 40%;"></div>
+  <div class="fpo" style="width: 40%;"></div>
+</div>
+```
+*/
+}
+
+.u-ac--fs {
+  -webkit-align-content: flex-start;
+      -ms-flex-line-pack: start;
+          align-content: flex-start;
+  /* ---
+section: Flexbox Utils
+title: Align Content: flex-start
+order: 3
+---
+**.u-ac--fs**
+
+A utility class for setting an element's `align-content` value to flex-start.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-ac, $modifier: fs [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper demo-wrap u-ac--fs" style="height: 15rem;">
+  <div class="fpo" style="width: 40%;"></div>
+  <div class="fpo" style="width: 40%;"></div>
+  <div class="fpo" style="width: 40%;"></div>
+  <div class="fpo" style="width: 40%;"></div>
+</div>
+```
+*/
+}
+
+.u-ac--s {
+  -webkit-align-content: stretch;
+      -ms-flex-line-pack: stretch;
+          align-content: stretch;
+  /* ---
+section: Flexbox Utils
+title: Align Content: stretch
+order: 4
+---
+**.u-ac--s**
+
+A utility class for setting an element's `align-content` value to stretch.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-ac, $modifier: s [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper demo-wrap u-ac--s" style="height: 15rem;">
+  <div class="fpo" style="width: 40%;"></div>
+  <div class="fpo" style="width: 40%;"></div>
+  <div class="fpo" style="width: 40%;"></div>
+  <div class="fpo" style="width: 40%;"></div>
+</div>
+```
+*/
+}
+
+.u-ac--sa {
+  -webkit-align-content: space-around;
+      -ms-flex-line-pack: distribute;
+          align-content: space-around;
+  /* ---
+section: Flexbox Utils
+title: Align Content: space-around
+order: 5
+---
+**.u-ac--sa**
+
+A utility class for setting an element's `align-content` value to space-around.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-ac, $modifier: sa [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper demo-wrap u-ac--sa" style="height: 15rem;">
+  <div class="fpo" style="width: 40%;"></div>
+  <div class="fpo" style="width: 40%;"></div>
+  <div class="fpo" style="width: 40%;"></div>
+  <div class="fpo" style="width: 40%;"></div>
+</div>
+```
+*/
+}
+
+.u-ac--sb {
+  -webkit-align-content: space-between;
+      -ms-flex-line-pack: justify;
+          align-content: space-between;
+  /* ---
+section: Flexbox Utils
+title: Align Content: space-between
+order: 6
+---
+**.u-ac--sb**
+
+A utility class for setting an element's `align-content` value to space-between.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-ac, $modifier: sb [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper demo-wrap u-ac--sb" style="height: 15rem;">
+  <div class="fpo" style="width: 40%;"></div>
+  <div class="fpo" style="width: 40%;"></div>
+  <div class="fpo" style="width: 40%;"></div>
+  <div class="fpo" style="width: 40%;"></div>
+</div>
+```
+*/
+}
+
+.u-ai--b {
+  -webkit-box-align: baseline;
+  -webkit-align-items: baseline;
+      -ms-flex-align: baseline;
+              -ms-grid-row-align: baseline;
+          align-items: baseline;
+  /* ---
+section: Flexbox Utils
+title: Align Items: baseline
+order: 17
+---
+**.u-ai--b**
+
+A utility class for setting an element's `align-items` value to baseline.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-ai, $modifier: b [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper u-ai--b">
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te.
+  </div>
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  </div>
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  </div>
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  </div>
+</div>
+```
+*/
+}
+
+.u-ai--c {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+              -ms-grid-row-align: center;
+          align-items: center;
+  /* ---
+section: Flexbox Utils
+title: Align Items: center
+order: 18
+---
+**.u-ai--c**
+
+A utility class for setting an element's `align-items` value to center.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-ai, $modifier: c [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper u-ai--c">
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te.
+  </div>
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  </div>
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  </div>
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  </div>
+</div>
+```
+*/
+}
+
+.u-ai--fe {
+  -webkit-box-align: end;
+  -webkit-align-items: flex-end;
+      -ms-flex-align: end;
+              -ms-grid-row-align: flex-end;
+          align-items: flex-end;
+  /* ---
+section: Flexbox Utils
+title: Align Items: flex-end
+order: 19
+---
+**.u-ai--fe**
+
+A utility class for setting an element's `align-items` value to flex-end.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-ai, $modifier: fe [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper u-ai--fe">
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te.
+  </div>
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  </div>
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  </div>
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  </div>
+</div>
+```
+*/
+}
+
+.u-ai--fs {
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+              -ms-grid-row-align: flex-start;
+          align-items: flex-start;
+  /* ---
+section: Flexbox Utils
+title: Align Items: flex-start
+order: 20
+---
+**.u-ai--fs**
+
+A utility class for setting an element's `align-items` value to flex-start.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-ai, $modifier: fs [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper u-ai--fs">
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te.
+  </div>
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  </div>
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  </div>
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  </div>
+</div>
+```
+*/
+}
+
+.u-ai--s {
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+      -ms-flex-align: stretch;
+              -ms-grid-row-align: stretch;
+          align-items: stretch;
+  /* ---
+section: Flexbox Utils
+title: Align Items: stretch
+order: 21
+---
+**.u-ai--s**
+
+A utility class for setting an element's `align-items` value to stretch.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-ai, $modifier: s [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper u-ai--s">
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te.
+  </div>
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  </div>
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  </div>
+  <div class="fpo">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  </div>
+</div>
+```
+*/
+}
+
+.u-as--a {
+  -webkit-align-self: auto;
+      -ms-flex-item-align: auto;
+          align-self: auto;
+  /* ---
+section: Flexbox Utils
+title: Align Self: auto
+order: 32
+---
+**.u-as--a**
+
+A utility class for setting an element's `align-self` value to auto.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-as, $modifier: a [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper" style="align-items: flex-start";>
+  <div class="fpo" style="width: 25%">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  </div>
+  <div class="fpo u-as--a" style="width: 25%">
+    This element's <code>align-self</code> property is set to <code>auto</code>
+  </div>
+  <div class="fpo" style="width: 25%">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  </div>
+  <div class="fpo" style="width: 25%">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  </div>
+</div>
+```
+*/
+}
+
+.u-as--b {
+  -webkit-align-self: baseline;
+      -ms-flex-item-align: baseline;
+          align-self: baseline;
+  /* ---
+section: Flexbox Utils
+title: Align Self: baseline
+order: 33
+---
+**.u-as--b**
+
+A utility class for setting an element's `align-self` value to baseline.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-as, $modifier: b [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper" style="align-items: flex-start";>
+  <div class="fpo" style="width: 25%">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  </div>
+  <div class="fpo u-as--b" style="width: 25%">
+    This element's <code>align-self</code> property is set to <code>baseline</code>
+  </div>
+  <div class="fpo" style="width: 25%">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  </div>
+  <div class="fpo" style="width: 25%">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  </div>
+</div>
+```
+*/
+}
+
+.u-as--c {
+  -webkit-align-self: center;
+      -ms-flex-item-align: center;
+          align-self: center;
+  /* ---
+section: Flexbox Utils
+title: Align Self: center
+order: 34
+---
+**.u-as--c**
+
+A utility class for setting an element's `align-self` value to center.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-as, $modifier: c [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper" style="align-items: flex-start";>
+  <div class="fpo" style="width: 25%">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  </div>
+  <div class="fpo u-as--c" style="width: 25%">
+    This element's <code>align-self</code> property is set to <code>center</code>
+  </div>
+  <div class="fpo" style="width: 25%">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  </div>
+  <div class="fpo" style="width: 25%">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  </div>
+</div>
+```
+*/
+}
+
+.u-as--fe {
+  -webkit-align-self: flex-end;
+      -ms-flex-item-align: end;
+          align-self: flex-end;
+  /* ---
+section: Flexbox Utils
+title: Align Self: flex-end
+order: 35
+---
+**.u-as--fe**
+
+A utility class for setting an element's `align-self` value to flex-end.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-as, $modifier: fe [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper" style="align-items: flex-start";>
+  <div class="fpo" style="width: 25%">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  </div>
+  <div class="fpo u-as--fe" style="width: 25%">
+    This element's <code>align-self</code> property is set to <code>flex-end</code>
+  </div>
+  <div class="fpo" style="width: 25%">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  </div>
+  <div class="fpo" style="width: 25%">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  </div>
+</div>
+```
+*/
+}
+
+.u-as--fs {
+  -webkit-align-self: flex-start;
+      -ms-flex-item-align: start;
+          align-self: flex-start;
+  /* ---
+section: Flexbox Utils
+title: Align Self: flex-start
+order: 36
+---
+**.u-as--fs**
+
+A utility class for setting an element's `align-self` value to flex-start.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-as, $modifier: fs [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper" style="align-items: flex-end";>
+  <div class="fpo" style="width: 25%">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  </div>
+  <div class="fpo u-as--fs" style="width: 25%">
+    This element's <code>align-self</code> property is set to <code>flex-start</code>
+  </div>
+  <div class="fpo" style="width: 25%">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  </div>
+  <div class="fpo" style="width: 25%">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  </div>
+</div>
+```
+*/
+}
+
+.u-as--s {
+  -webkit-align-self: stretch;
+      -ms-flex-item-align: stretch;
+          align-self: stretch;
+  /* ---
+section: Flexbox Utils
+title: Align Self: stretch
+order: 37
+---
+**.u-as--s**
+
+A utility class for setting an element's `align-self` value to stretch.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-as, $modifier: s [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper" style="align-items: flex-start";>
+  <div class="fpo" style="width: 25%">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique, at vix soluta eruditi assueverit, pro dico utinam forensibus ei. Ullum propriae pro no.
+  </div>
+  <div class="fpo u-as--s" style="width: 25%">
+    This element's <code>align-self</code> property is set to <code>stretch</code>
+  </div>
+  <div class="fpo" style="width: 25%">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his.
+  </div>
+  <div class="fpo" style="width: 25%">
+    Lorem ipsum dolor sit amet, pro postea officiis periculis te. Ad mel tale suas vidit, stet docendi eloquentiam ut his. Est an integre offendit instructior. Ea sed cibo dolor, vel an nostro ceteros democritum. Vel at ipsum commodo similique.
+  </div>
+</div>
+```
+*/
+}
+
+.u-jc--c {
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  /* ---
+section: Flexbox Utils
+title: Justify Content: center
+order: 48
+---
+**.u-jc--c**
+
+A utility class for setting an element's `justify-content` value to center.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-jc, $modifier: c [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper u-jc--c">
+  <div class="fpo" style="width: 33%"></div>
+  <div class="fpo" style="width: 33%"></div>
+</div>
+```
+*/
+}
+
+.u-jc--fe {
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  /* ---
+section: Flexbox Utils
+title: Justify Content: flex-end
+order: 49
+---
+**.u-jc--fe**
+
+A utility class for setting an element's `justify-content` value to flex-end.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-jc, $modifier: fe [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper u-jc--fe">
+  <div class="fpo" style="width: 33%"></div>
+  <div class="fpo" style="width: 33%"></div>
+</div>
+```
+*/
+}
+
+.u-jc--fs {
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  /* ---
+section: Flexbox Utils
+title: Justify Content: flex-start
+order: 50
+---
+**.u-jc--fs**
+
+A utility class for setting an element's `justify-content` value to flex-start.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-jc, $modifier: fs [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper u-jc--fs">
+  <div class="fpo" style="width: 33%"></div>
+  <div class="fpo" style="width: 33%"></div>
+</div>
+```
+*/
+}
+
+.u-jc--sa {
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+  /* ---
+section: Flexbox Utils
+title: Justify Content: space-around
+order: 51
+---
+**.u-jc--sa**
+
+A utility class for setting an element's `justify-content` value to space-around.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-jc, $modifier: sa [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper u-jc--sa">
+  <div class="fpo" style="width: 33%"></div>
+  <div class="fpo" style="width: 33%"></div>
+</div>
+```
+*/
+}
+
+.u-jc--sb {
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  /* ---
+section: Flexbox Utils
+title: Justify Content: space-between
+order: 52
+---
+**.u-jc--sb**
+
+A utility class for setting an element's `justify-content` value to space-between.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-jc, $modifier: sb [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper u-jc--sb">
+  <div class="fpo" style="width: 33%"></div>
+  <div class="fpo" style="width: 33%"></div>
+</div>
+```
+*/
+}
+
+.u-fb--a {
+  -webkit-flex-basis: auto;
+      -ms-flex-preferred-size: auto;
+          flex-basis: auto;
+  /* ---
+section: Flexbox Utils
+title: Flex Basis: auto
+order: 63
+---
+**.u-fb--a**
+
+A utility class for setting an element's `flex-basis` value to auto.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-fb, $modifier: a [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper">
+  <div class="fpo"></div>
+  <div class="fpo  u-fb--a">flex-basis: a</div>
+  <div class="fpo"></div>
+</div>
+```
+*/
+}
+
+.u-fb--25\% {
+  -webkit-flex-basis: 25%;
+      -ms-flex-preferred-size: 25%;
+          flex-basis: 25%;
+  /* ---
+section: Flexbox Utils
+title: Flex Basis: 25%
+order: 64
+---
+**.u-fb--25%**
+
+A utility class for setting an element's `flex-basis` value to 25%.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-fb, $modifier: 25% [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper">
+  <div class="fpo"></div>
+  <div class="fpo  u-fb--25%">flex-basis: 25%</div>
+  <div class="fpo"></div>
+</div>
+```
+*/
+}
+
+.u-fb--50\% {
+  -webkit-flex-basis: 50%;
+      -ms-flex-preferred-size: 50%;
+          flex-basis: 50%;
+  /* ---
+section: Flexbox Utils
+title: Flex Basis: 50%
+order: 65
+---
+**.u-fb--50%**
+
+A utility class for setting an element's `flex-basis` value to 50%.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-fb, $modifier: 50% [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper">
+  <div class="fpo"></div>
+  <div class="fpo  u-fb--50%">flex-basis: 50%</div>
+  <div class="fpo"></div>
+</div>
+```
+*/
+}
+
+.u-fb--75\% {
+  -webkit-flex-basis: 75%;
+      -ms-flex-preferred-size: 75%;
+          flex-basis: 75%;
+  /* ---
+section: Flexbox Utils
+title: Flex Basis: 75%
+order: 66
+---
+**.u-fb--75%**
+
+A utility class for setting an element's `flex-basis` value to 75%.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-fb, $modifier: 75% [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper">
+  <div class="fpo"></div>
+  <div class="fpo  u-fb--75%">flex-basis: 75%</div>
+  <div class="fpo"></div>
+</div>
+```
+*/
+}
+
+.u-fxg--1 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  /* ---
+section: Flexbox Utils
+title: Flex Grow: 1
+order: 127
+---
+**.u-fxg--1**
+
+A utility class for setting an element's `flex-grow` value to 1.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-fxg, $modifier: 1 [, $from, $until, $misc]);
+```
+*/
+}
+
+.u-fxsh--1 {
+  -webkit-flex-shrink: 1;
+      -ms-flex-negative: 1;
+          flex-shrink: 1;
+  /* ---
+section: Flexbox Utils
+title: Flex Shrink: 1
+order: 178
+---
+**.u-fxsh--1**
+
+A utility class for setting an element's `flex-shrink` value to 1.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-fxsh, $modifier: 1 [, $from, $until, $misc]);
+```
+*/
+}
+
+.u-fxw--n {
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  /* ---
+section: Flexbox Utils
+title: Flex Wrap: nowrap
+order: 229
+---
+**.u-fxw--n**
+
+A utility class for setting an element's `flex-wrap` value to nowrap.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-fxw, $modifier: n [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper u-fxw--n">
+  <div class="fpo" style="width: 40%"></div>
+  <div class="fpo" style="width: 40%"></div>
+  <div class="fpo" style="width: 40%"></div>
+</div>
+```
+*/
+}
+
+.u-fxw--w {
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  /* ---
+section: Flexbox Utils
+title: Flex Wrap: wrap
+order: 230
+---
+**.u-fxw--w**
+
+A utility class for setting an element's `flex-wrap` value to wrap.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-fxw, $modifier: w [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper u-fxw--w">
+  <div class="fpo" style="width: 40%"></div>
+  <div class="fpo" style="width: 40%"></div>
+  <div class="fpo" style="width: 40%"></div>
+</div>
+```
+*/
+}
+
+.u-fxw--wr {
+  -webkit-flex-wrap: wrap-reverse;
+      -ms-flex-wrap: wrap-reverse;
+          flex-wrap: wrap-reverse;
+  /* ---
+section: Flexbox Utils
+title: Flex Wrap: wrap-reverse
+order: 231
+---
+**.u-fxw--wr**
+
+A utility class for setting an element's `flex-wrap` value to wrap-reverse.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-fxw, $modifier: wr [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper u-fxw--wr">
+  <div class="fpo" style="width: 40%"></div>
+  <div class="fpo" style="width: 40%"></div>
+  <div class="fpo" style="width: 40%"></div>
+</div>
+```
+*/
+}
+
+.u-fxd--c {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  /* ---
+section: Flexbox Utils
+title: Flex Direction: column
+order: 242
+---
+**.u-fxd--c**
+
+A utility class for setting an element's `flex-direction` value to column.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-fxd, $modifier: c [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper u-fxd--c">
+  <div class="fpo">item 1</div>
+  <div class="fpo">item 2</div>
+  <div class="fpo">item 3</div>
+</div>
+```
+*/
+}
+
+.u-fxd--cr {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+  -webkit-flex-direction: column-reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+  /* ---
+section: Flexbox Utils
+title: Flex Direction: column-reverse
+order: 243
+---
+**.u-fxd--cr**
+
+A utility class for setting an element's `flex-direction` value to column-reverse.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-fxd, $modifier: cr [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper u-fxd--cr">
+  <div class="fpo">item 1</div>
+  <div class="fpo">item 2</div>
+  <div class="fpo">item 3</div>
+</div>
+```
+*/
+}
+
+.u-fxd--r {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  /* ---
+section: Flexbox Utils
+title: Flex Direction: row
+order: 244
+---
+**.u-fxd--r**
+
+A utility class for setting an element's `flex-direction` value to row.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-fxd, $modifier: r [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper u-fxd--r">
+  <div class="fpo">item 1</div>
+  <div class="fpo">item 2</div>
+  <div class="fpo">item 3</div>
+</div>
+```
+*/
+}
+
+.u-fxd--rr {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  -webkit-flex-direction: row-reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  /* ---
+section: Flexbox Utils
+title: Flex Direction: row-reverse
+order: 245
+---
+**.u-fxd--rr**
+
+A utility class for setting an element's `flex-direction` value to row-reverse.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-fxd, $modifier: rr [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper u-fxd--rr">
+  <div class="fpo">item 1</div>
+  <div class="fpo">item 2</div>
+  <div class="fpo">item 3</div>
+</div>
+```
+*/
+}
+
+.u-ord--min-1 {
+  -webkit-box-ordinal-group: 0;
+  -webkit-order: -1;
+      -ms-flex-order: -1;
+          order: -1;
+  /* ---
+section: Flexbox Utils
+title:  Order:  -1
+order: 256
+---
+**.u-ord--min-1**
+
+A utility class for setting an element's `flex-direction` value to -1.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-ord, $modifier: min-1 [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper">
+  <div class="fpo  fpo--b">item 1</div>
+  <div class="[ fpo fpo--b ] u-ord--min-1">item 2</div>
+  <div class="fpo fpo--b">item 3</div>
+</div>
+```
+*/
+}
+
+.u-ord--1 {
+  -webkit-box-ordinal-group: 2;
+  -webkit-order: 1;
+      -ms-flex-order: 1;
+          order: 1;
+  /* ---
+section: Flexbox Utils
+title:  Order:  1
+order: 257
+---
+**.u-ord--1**
+
+A utility class for setting an element's `flex-direction` value to 1.
+
+#### Include with:
+
+```scss
+@include jigsass-util(u-ord, $modifier: 1 [, $from, $until, $misc]);
+```
+
+#### Example
+```example:html
+<div class="demo-wrapper">
+  <div class="fpo  fpo--b">item 1</div>
+  <div class="[ fpo fpo--b ] u-ord--1">item 2</div>
+  <div class="fpo fpo--b">item 3</div>
+</div>
+```
+*/
+}
+
+html {
+  font-size: 37.5%;
+}
+
+body {
+  font-size: 2.6666666667em;
+  line-height: 4rem;
+}
+
+html {
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0 !important;
+}
+
+.demo-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: paleturquoise;
+}
+
+.demo-wrap {
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+
+.fpo {
+  background-color: #09a5d9;
+  color: #fff;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.fpo {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+figure,
+ul,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
